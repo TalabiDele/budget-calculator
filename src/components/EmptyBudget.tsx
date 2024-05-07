@@ -6,7 +6,7 @@ const EmptyBudget = () => {
 	return (
 		<div>
 			<Box marginTop={'2rem'}>
-				<Image src={icon} width={'10rem'} mx={'auto'} />
+				<Image src={icon} width={'8rem'} mx={'auto'} />
 				<Text
 					textAlign={'center'}
 					color={'gray'}

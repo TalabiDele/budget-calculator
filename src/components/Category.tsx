@@ -5,7 +5,7 @@ const Category = () => {
 	return (
 		<div>
 			<Box mt={'1rem'}>
-				<Heading size={'md'} color={'navy'}>
+				<Heading fontSize={'md'} color={'navy'}>
 					Category Breakdown
 				</Heading>
 
