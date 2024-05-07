@@ -1,5 +1,4 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
-import React from 'react'
 import { FaPlus } from 'react-icons/fa6'
 
 const CreateBtn = () => {

@@ -17,7 +17,7 @@ const Budget = () => {
 				height={'100vh'}
 				borderRadius={'5px'}
 				boxShadow={'lg'}
-				padding={'2rem'}
+				padding={'1rem 2rem'}
 			>
 				<BudgetView />
 			</Box>

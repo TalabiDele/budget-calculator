@@ -1,5 +1,4 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
-import React from 'react'
 import { IoIosMore } from 'react-icons/io'
 
 const MonthNav = () => {

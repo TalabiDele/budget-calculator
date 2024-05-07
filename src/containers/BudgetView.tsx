@@ -1,4 +1,3 @@
-import React from 'react'
 import Headers from '../components/Headers'
 import Paragraph from '../components/Paragraph'
 import { Box, Icon } from '@chakra-ui/react'

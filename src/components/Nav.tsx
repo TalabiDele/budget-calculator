@@ -1,4 +1,3 @@
-import React from 'react'
 import { SlHome } from 'react-icons/sl'
 import { HiDocument } from 'react-icons/hi2'
 import { MdBarChart } from 'react-icons/md'
