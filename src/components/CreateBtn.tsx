@@ -1,9 +1,10 @@
 import { Box, Icon, Text } from '@chakra-ui/react'
 import { FaPlus } from 'react-icons/fa6'
+import { Link } from 'react-router-dom'
 
 const CreateBtn = () => {
 	return (
-		<div>
+		<Link to={'/create-budget'}>
 			<Box
 				cursor={'pointer'}
 				display={'flex'}
@@ -29,7 +30,7 @@ const CreateBtn = () => {
 					borderRadius={'50%'}
 				/>
 			</Box>
-		</div>
+		</Link>
 	)
 }
 

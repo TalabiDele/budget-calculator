@@ -27,6 +27,11 @@ const theme = extendTheme({
 		md: '21px',
 		lg: '28px',
 	},
+	borderBottomColor: {
+		gray: {
+			100: '#707480',
+		},
+	},
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

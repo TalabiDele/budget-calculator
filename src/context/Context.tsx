@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode } from 'react'
+import React, { createContext, ReactNode, useState } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 
 interface Category {
@@ -13,6 +13,8 @@ interface ContextData {
 	setBudgetCategory: (newValue: Category[]) => void
 	budgetAmount: number
 	setBudgetAmount: (newValue: number) => void
+	step: number
+	setStep: (newValue: number) => void
 }
 
 interface Props {
@@ -29,6 +31,7 @@ export const Provider: React.FC<Props> = ({ children }) => {
 		[initialValue]
 	)
 	const [budgetAmount, setBudgetAmount] = useLocalStorage<number>('amount', 0)
+	const [step, setStep] = useState<number>(1)
 
 	return (
 		<Context.Provider
@@ -37,6 +40,8 @@ export const Provider: React.FC<Props> = ({ children }) => {
 				setBudgetCategory,
 				budgetAmount,
 				setBudgetAmount,
+				step,
+				setStep,
 			}}
 		>
 			{children}
