@@ -15,6 +15,10 @@ interface ContextData {
 	setBudgetAmount: (newValue: number) => void
 	step: number
 	setStep: (newValue: number) => void
+	amount: number | undefined
+	setAmount: (newValue: number) => void
+	percentLeft: number | undefined
+	setPercentLeft: (newValue: number) => void
 }
 
 interface Props {
@@ -32,6 +36,8 @@ export const Provider: React.FC<Props> = ({ children }) => {
 	)
 	const [budgetAmount, setBudgetAmount] = useLocalStorage<number>('amount', 0)
 	const [step, setStep] = useState<number>(1)
+	const [amount, setAmount] = useState<number>()
+	const [percentLeft, setPercentLeft] = useState<number>(0)
 
 	return (
 		<Context.Provider
@@ -42,6 +48,10 @@ export const Provider: React.FC<Props> = ({ children }) => {
 				setBudgetAmount,
 				step,
 				setStep,
+				amount,
+				setAmount,
+				percentLeft,
+				setPercentLeft,
 			}}
 		>
 			{children}

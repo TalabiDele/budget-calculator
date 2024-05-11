@@ -1,9 +1,9 @@
 import { Box, Input } from '@chakra-ui/react'
 import Paragraph from './Paragraph'
-import React, { useState } from 'react'
+import useMyContext from '../hooks/useMyContext'
 
 const StepOne: React.FC = () => {
-	const [amount, setAmount] = useState<number>()
+	const { amount, setAmount } = useMyContext()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setAmount(parseFloat(e.target.value))
@@ -16,7 +16,7 @@ const StepOne: React.FC = () => {
 			<Input
 				placeholder='Amount (in ₦)'
 				type='number'
-				fontSize={'sm'}
+				fontSize={'xs'}
 				mt={'1rem'}
 				variant='flushed'
 				value={amount}
