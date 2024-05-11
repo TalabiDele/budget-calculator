@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useMyContext from '../hooks/useMyContext'
 import {
 	Box,
@@ -16,6 +16,8 @@ import { BiDish } from 'react-icons/bi'
 import { PiPiggyBank } from 'react-icons/pi'
 
 const StepTwo = () => {
+	const [isCategory, setIsCategory] = useState<string>('')
+
 	const { amount, setAmount } = useMyContext()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +44,39 @@ const StepTwo = () => {
 					textAlign={'left'}
 					mt={'1rem'}
 				>
-					Select Expense Category
+					{isCategory === '' && 'Select Expense Category'}
+					{isCategory === 'Food and Drinks' && (
+						<Box display={'flex'} alignItems={'center'}>
+							<Icon
+								as={BiDish}
+								fontSize={'1.5rem'}
+								color={'#C89104'}
+								bg={'#F4E9CD'}
+								height={'1.5rem'}
+								width={'1.5rem'}
+								borderRadius={'50%'}
+								padding={'0.2rem'}
+								mr={'1rem'}
+							/>
+							<span>Food and Drinks</span>
+						</Box>
+					)}
+					{isCategory === 'Saving' && (
+						<Box display={'flex'} alignItems={'center'}>
+							<Icon
+								as={PiPiggyBank}
+								fontSize={'1.5rem'}
+								color={'#038A39'}
+								bg={'#038a3945'}
+								height={'1.5rem'}
+								width={'1.5rem'}
+								borderRadius={'50%'}
+								padding={'0.2rem'}
+								mr={'1rem'}
+							/>
+							<span>Savings</span>
+						</Box>
+					)}
 				</MenuButton>
 				<MenuList>
 					<MenuItem
@@ -51,6 +85,7 @@ const StepTwo = () => {
 						color={'gray'}
 						_focus={{ bg: 'none' }}
 						fontSize={'xs'}
+						onClick={() => setIsCategory('Food and Drinks')}
 					>
 						<Icon
 							as={BiDish}
@@ -71,6 +106,7 @@ const StepTwo = () => {
 						color={'gray'}
 						_focus={{ bg: 'none' }}
 						fontSize={'xs'}
+						onClick={() => setIsCategory('Saving')}
 					>
 						<Icon
 							as={PiPiggyBank}
