@@ -21,7 +21,9 @@ const StepOne: React.FC = () => {
 				variant='flushed'
 				value={amount}
 				onChange={handleChange}
-				color={'gray'}
+				color={'navy'}
+				_placeholder={{ color: 'gray', fontWeight: 'medium' }}
+				fontWeight={'bold'}
 			/>
 		</Box>
 	)

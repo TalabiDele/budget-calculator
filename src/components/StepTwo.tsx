@@ -132,7 +132,9 @@ const StepTwo = () => {
 				variant='flushed'
 				value={amount}
 				onChange={handleChange}
-				color={'gray'}
+				color={'navy'}
+				fontWeight={'bold'}
+				_placeholder={{ color: 'gray', fontWeight: 'medium' }}
 			/>
 		</Box>
 	)
