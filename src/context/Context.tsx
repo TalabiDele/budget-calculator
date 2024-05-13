@@ -3,7 +3,7 @@ import { useLocalStorage } from 'usehooks-ts'
 
 interface Category {
 	name: string
-	amount: number
+	amount: string
 	percent: number
 	id: string
 	// icon: string
@@ -26,7 +26,7 @@ interface Props {
 	children?: ReactNode
 }
 
-const initialValue = { name: '', amount: 0, percent: 0, id: '' }
+const initialValue = { name: '', amount: '', percent: 0, id: '' }
 
 const Context = createContext<ContextData | undefined>(undefined)
 
@@ -38,7 +38,7 @@ export const Provider: React.FC<Props> = ({ children }) => {
 	const [budgetAmount, setBudgetAmount] = useLocalStorage<number>('amount', 0)
 	const [step, setStep] = useState<number>(1)
 	const [amount, setAmount] = useState<number>()
-	const [percentLeft, setPercentLeft] = useState<number>(0)
+	const [percentLeft, setPercentLeft] = useState<number | undefined>(100)
 
 	return (
 		<Context.Provider

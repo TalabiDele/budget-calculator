@@ -3,9 +3,12 @@ import React from 'react'
 import useMyContext from '../hooks/useMyContext'
 import { BsArrowRight } from 'react-icons/bs'
 import toast from 'react-hot-toast'
+import addNumbers from '../utils/addNumbers'
 
 const NextComponent: React.FC = () => {
-	const { step, amount, setStep, percentLeft } = useMyContext()
+	const { step, amount, setStep, percentLeft, budgetCategory } = useMyContext()
+
+	const sum: number = addNumbers(budgetCategory)
 
 	const handleNext = () => {
 		if (amount === undefined) {
@@ -66,9 +69,11 @@ const NextComponent: React.FC = () => {
 						alignItems={'center'}
 						justifyContent={'space-between'}
 					>
-						<Text fontSize={'xs'} color={'gray'}>
-							% of budget remaining : {percentLeft}%
-						</Text>
+						{percentLeft && (
+							<Text fontSize={'xs'} color={'gray'}>
+								% of budget remaining : {(percentLeft - sum).toFixed(0)}%
+							</Text>
+						)}
 						<Button
 							rightIcon={<BsArrowRight />}
 							color={'bg.200'}

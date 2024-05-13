@@ -18,21 +18,20 @@ import { PiPiggyBank } from 'react-icons/pi'
 import { HiPlus } from 'react-icons/hi'
 import toast from 'react-hot-toast'
 import Budgets from './Budgets'
+import addNumbers from '../utils/addNumbers'
 
 const StepTwo = () => {
 	const [isCategory, setIsCategory] = useState<string>('')
 	const [percent, setPercent] = useState<number>(0)
-	const [budgetAmount, setBudgetAmount] = useState<number | undefined>(
+	const [budgetAmount, setBudgetAmount] = useState<string | undefined>(
 		undefined
 	)
 
 	const { amount, budgetCategory, setBudgetCategory } = useMyContext()
 
-	console.log(budgetAmount)
-
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault()
-		setBudgetAmount(parseFloat(e.target.value))
+		setBudgetAmount(e.target.value)
 
 		const budget = parseFloat(e.target.value)
 
@@ -69,7 +68,22 @@ const StepTwo = () => {
 				})
 				setBudgetCategory(budgetCategory)
 
-				console.log(budgetCategory)
+				const sum: number = addNumbers(budgetCategory)
+
+				if (sum > 100) {
+					toast.error('Expense is more than budget!')
+					budgetCategory.pop()
+
+					setBudgetCategory(budgetCategory)
+				} else {
+					setIsCategory('')
+
+					setPercent(0)
+
+					setBudgetAmount('')
+
+					toast.success('Budget added!')
+				}
 			}
 		} else {
 			toast.error('Enter your budget amount!', {
@@ -200,7 +214,7 @@ const StepTwo = () => {
 				mt={'2rem'}
 			>
 				<Text fontSize={'xs'} color={'bg.200'} fontWeight={'500'}>
-					% of budget: {percent}%
+					% of budget: {percent.toFixed(0)}%
 				</Text>
 
 				<Icon

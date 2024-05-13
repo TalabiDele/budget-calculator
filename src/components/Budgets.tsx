@@ -4,9 +4,18 @@ import useMyContext from '../hooks/useMyContext'
 import { BiDish } from 'react-icons/bi'
 import { PiPiggyBank } from 'react-icons/pi'
 import { FaMinus } from 'react-icons/fa'
+import toast from 'react-hot-toast'
 
 const Budgets: React.FC = () => {
-	const { budgetCategory } = useMyContext()
+	const { budgetCategory, setBudgetCategory } = useMyContext()
+
+	const removeBudget = (id: string) => {
+		const filter = budgetCategory.filter((budget) => budget.id !== id)
+
+		setBudgetCategory(filter)
+
+		toast.success('Item removed')
+	}
 
 	return (
 		<div>
@@ -14,21 +23,12 @@ const Budgets: React.FC = () => {
 				{budgetCategory?.map(
 					(budget) =>
 						budget.name !== '' && (
-							// <
-							// 	mb={'1rem'}
-							// 	color={'navy'}
-							// 	fontWeight={'500'}
-							// 	fontSize={'xs'}
-							// 	display={'grid'}
-							// 	gridColumn={'4'}
-							// >
 							<Grid
 								templateColumns='repeat(8, 1fr)'
 								mb={'1rem'}
 								color={'navy'}
 								fontWeight={'500'}
 								fontSize={'xs'}
-								// justifyItems={'center'}
 							>
 								<GridItem colSpan={1} width={'2rem'}>
 									{budget.name === 'Food and Drinks' && (
@@ -68,7 +68,7 @@ const Budgets: React.FC = () => {
 								</GridItem>
 
 								<GridItem colSpan={1} justifySelf={'flex-start'}>
-									<Text>{budget.percent}%</Text>
+									<Text>{budget.percent.toFixed(0)}%</Text>
 								</GridItem>
 
 								<GridItem colSpan={1} justifySelf={'flex-end'}>
@@ -81,6 +81,7 @@ const Budgets: React.FC = () => {
 										borderRadius={'50%'}
 										padding={'0.4rem'}
 										cursor={'pointer'}
+										onClick={() => removeBudget(budget.id)}
 									/>
 								</GridItem>
 							</Grid>
