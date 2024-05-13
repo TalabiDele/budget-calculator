@@ -5,7 +5,8 @@ interface Category {
 	name: string
 	amount: number
 	percent: number
-	icon: string
+	id: string
+	// icon: string
 }
 
 interface ContextData {
@@ -25,7 +26,7 @@ interface Props {
 	children?: ReactNode
 }
 
-const initialValue = { name: '', amount: 0, percent: 0, icon: '' }
+const initialValue = { name: '', amount: 0, percent: 0, id: '' }
 
 const Context = createContext<ContextData | undefined>(undefined)
 

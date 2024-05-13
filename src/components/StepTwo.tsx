@@ -16,6 +16,8 @@ import { BsChevronDown } from 'react-icons/bs'
 import { BiDish } from 'react-icons/bi'
 import { PiPiggyBank } from 'react-icons/pi'
 import { HiPlus } from 'react-icons/hi'
+import toast from 'react-hot-toast'
+import Budgets from './Budgets'
 
 const StepTwo = () => {
 	const [isCategory, setIsCategory] = useState<string>('')
@@ -24,7 +26,9 @@ const StepTwo = () => {
 		undefined
 	)
 
-	const { amount } = useMyContext()
+	const { amount, budgetCategory, setBudgetCategory } = useMyContext()
+
+	console.log(budgetAmount)
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault()
@@ -39,7 +43,7 @@ const StepTwo = () => {
 
 			console.log(percentage)
 
-			setPercent((prevState) => {
+			setPercent(() => {
 				// console.log('Previous state:', prevState)
 				return percentage
 			})
@@ -48,6 +52,32 @@ const StepTwo = () => {
 		}
 
 		// console.log(budgetAmount)
+	}
+
+	const handleAddBudget = () => {
+		if (budgetAmount) {
+			if (percent > 100) {
+				toast.error('Oopss... Expense is more than your budget!', {
+					duration: 6000,
+				})
+			} else {
+				budgetCategory.push({
+					name: isCategory,
+					amount: budgetAmount,
+					percent,
+					id: `B${Math.floor(Math.random() * 100)}`,
+				})
+				setBudgetCategory(budgetCategory)
+
+				console.log(budgetCategory)
+			}
+		} else {
+			toast.error('Enter your budget amount!', {
+				duration: 6000,
+			})
+		}
+
+		// setBudgetCategory()
 	}
 
 	return (
@@ -181,9 +211,11 @@ const StepTwo = () => {
 					padding={'0.2rem'}
 					borderRadius={'50%'}
 					cursor={'pointer'}
-					onClick={() => console.log(budgetAmount)}
+					onClick={handleAddBudget}
 				/>
 			</Box>
+
+			<Budgets />
 		</Box>
 	)
 }
