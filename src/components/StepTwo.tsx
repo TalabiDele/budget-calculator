@@ -9,19 +9,45 @@ import {
 	MenuButton,
 	MenuItem,
 	MenuList,
+	Text,
 } from '@chakra-ui/react'
 import Paragraph from './Paragraph'
 import { BsChevronDown } from 'react-icons/bs'
 import { BiDish } from 'react-icons/bi'
 import { PiPiggyBank } from 'react-icons/pi'
+import { HiPlus } from 'react-icons/hi'
 
 const StepTwo = () => {
 	const [isCategory, setIsCategory] = useState<string>('')
+	const [percent, setPercent] = useState<number>(0)
+	const [budgetAmount, setBudgetAmount] = useState<number | undefined>(
+		undefined
+	)
 
-	const { amount, setAmount } = useMyContext()
+	const { amount } = useMyContext()
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setAmount(parseFloat(e.target.value))
+		e.preventDefault()
+		setBudgetAmount(parseFloat(e.target.value))
+
+		const budget = parseFloat(e.target.value)
+
+		if (budget && amount) {
+			const percentage = (budget * 100) / amount
+
+			console.log(budget)
+
+			console.log(percentage)
+
+			setPercent((prevState) => {
+				// console.log('Previous state:', prevState)
+				return percentage
+			})
+		} else {
+			setPercent(0)
+		}
+
+		// console.log(budgetAmount)
 	}
 
 	return (
@@ -130,12 +156,34 @@ const StepTwo = () => {
 				fontSize={'xs'}
 				mt={'1rem'}
 				variant='flushed'
-				value={amount}
-				onChange={handleChange}
+				value={budgetAmount}
+				onChange={(e) => handleChange(e)}
 				color={'navy'}
 				fontWeight={'bold'}
 				_placeholder={{ color: 'gray', fontWeight: 'medium' }}
 			/>
+
+			<Box
+				display={'flex'}
+				justifyContent={'space-between'}
+				alignItems={'center'}
+				mt={'2rem'}
+			>
+				<Text fontSize={'xs'} color={'bg.200'} fontWeight={'500'}>
+					% of budget: {percent}%
+				</Text>
+
+				<Icon
+					as={HiPlus}
+					color={'bg.200'}
+					background={'bg.50'}
+					fontSize={'2rem'}
+					padding={'0.2rem'}
+					borderRadius={'50%'}
+					cursor={'pointer'}
+					onClick={() => console.log(budgetAmount)}
+				/>
+			</Box>
 		</Box>
 	)
 }
